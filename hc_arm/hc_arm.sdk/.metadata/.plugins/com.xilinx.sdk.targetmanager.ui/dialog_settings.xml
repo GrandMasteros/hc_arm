@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="Local" key="codec_system_wrapper_hw_platform_2-target"/>
+	<item value="codec_system_wrapper.bit" key="codec_system_wrapper_hw_platform_2-bitFile"/>
+	<item value="false" key="codec_system_wrapper_hw_platform_2-partial_bit"/>
+	<item value="codec_system_wrapper_hw_platform_2" key="programfpga.hwplatform"/>
+	<item value="Digilent Zed 210248492416/2-xc7z020" key="codec_system_wrapper_hw_platform_2-device"/>
+	<item value="" key="codec_system_wrapper_hw_platform_2-bmmFile"/>
+</section>

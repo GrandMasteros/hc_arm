@@ -1,0 +1,16 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
+| Date         : Mon Jun 17 12:21:10 2019
+| Host         : DESKTOP-0L5OS35 running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z020clg484-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'codec_system_Codec_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of codec_system_Codec_0_0 (xilinx.com:user:Codec:1.0) from (Rev. 2) to (Rev. 4)
+

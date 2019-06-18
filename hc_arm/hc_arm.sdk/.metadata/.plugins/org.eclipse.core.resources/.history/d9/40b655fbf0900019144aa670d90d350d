@@ -1,0 +1,71 @@
+/***************************** Include Files *********************************/
+#include <stdint.h>
+#include <stdbool.h>
+#include "xil_io.h"
+#include "xparameters.h"
+
+#include "IP_handler.h"
+#include ""
+
+/**************************** user definitions ********************************/
+
+// codec base address redefinition
+#define CODEC_BASE_ADDR 			XPAR_CODEC_S1_AXI_BASEADDR
+// codec registers offset redefinition
+#define START_REG_OFFSET 			CODEC_S1_AXI_SLV_REG0_OFFSET
+#define INPUT_SEQ_REG_OFFSET  		CODEC_S1_AXI_SLV_REG1_OFFSET
+#define INPUT_LENGTH_REG_OFFSET 	CODEC_S1_AXI_SLV_REG2_OFFSET
+#define MODE_REG_OFFSET 			CODEC_S1_AXI_SLV_REG3_OFFSET
+#define OUTPUT_SEQ_REG_OFFSET 		CODEC_S1_AXI_SLV_REG4_OFFSET
+#define OUTPUT_LENGTH_REG_OFFSET	CODEC_S1_AXI_SLV_REG5_OFFSET
+#define READY_REG_OFFSET 			CODEC_S1_AXI_SLV_REG6_OFFSET
+
+// custom processor bits masks
+#define START_CONTROL_REG_MASK ((u32)(1))
+#define OUTPUT_READY_REG_MASK  ((u32)(1))
+
+
+// #define LOWER_DWORD_MASK(val)  ((u32)((uint64_t)(((uint64_t)val) && ((uint64_t)0x00000000FFFFFFFF))))
+// #define UPPER_DWORD_MASK(val)  ((u32)((uint64_t)(((uint64_t)val) && ((uint64_t)0xFFFFFFFF00000000))>>32))
+
+
+
+/***************************** Accelerator IP service function **********************
+* The function runs the Hamming Coder/Decoder accelerator IP
+* Argument:
+* input - pointer on input data structure for accelerator IP
+* output - pointer on output data structure for accelerator IP
+* Function:
+* It takes input data sequence and parameters and pass it to IP,
+* then waits for response and write received coded/decoded data to output structure.
+*/
+
+void Handle_Data(const Codec_Data *input, Codec_Data *output)
+{
+	/* send data to input data registers of custom processor */
+	CODEC_mWriteReg(CODEC_BASE_ADDR, MODE_REG_OFFSET, input->function);
+	CODEC_mWriteReg(CODEC_BASE_ADDR, INPUT_SEQ_REG_OFFSET, input->data_seq);
+	CODEC_mWriteReg(CODEC_BASE_ADDR, INPUT_LENGTH_REG_OFFSET, input->seq_length);
+
+	/* start custom processor - pulse start bit in control register */
+	CODEC_mWriteReg(CODEC_BASE_ADDR, START_REG_OFFSET, START_CONTROL_REG_MASK);
+
+	/* Wait for ready bit in status register */
+	while((CODEC_mReadReg(CODEC_BASE_ADDR, READY_REG_OFFSET) & OUTPUT_READY_REG_MASK) == 0);
+	//{
+		//print(CODEC_mReadReg(CODEC_BASE_ADDR, OUTPUT_SEQ_REG_OFFSET));
+		//print(CODEC_mReadReg(CODEC_BASE_ADDR, OUTPUT_LENGTH_REG_OFFSET));
+
+	//}
+
+	/* get results */
+	output->function = input->function;
+	// read output sequence length
+	output->seq_length = (uint8_t)CODEC_mReadReg(CODEC_BASE_ADDR, OUTPUT_LENGTH_REG_OFFSET);
+	// read output_sequence
+	output->data_seq = CODEC_mReadReg(CODEC_BASE_ADDR, OUTPUT_SEQ_REG_OFFSET);
+
+	CODEC_mWriteReg(CODEC_BASE_ADDR, START_REG_OFFSET, 0);
+}
+
+

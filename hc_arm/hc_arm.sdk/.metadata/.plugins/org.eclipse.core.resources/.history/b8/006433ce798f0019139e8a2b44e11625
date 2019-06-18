@@ -1,0 +1,199 @@
+/*
+ * main.c: simple test application
+ *
+ * This application configures UART 16550 to baud rate 9600.
+ * PS7 UART (Zynq) is not initialized by this application, since
+ * bootrom/bsp configures it to baud rate 115200
+ *
+ * ------------------------------------------------
+ * | UART TYPE   BAUD RATE                        |
+ * ------------------------------------------------
+ *   uartns550   9600
+ *   uartlite    Configurable only in HW design
+ *   ps7_uart    115200 (configured by bootrom/bsp)
+ */
+
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "platform.h"
+
+#include "IP_handler.h"
+#include "Codec.h"
+
+#define MAX_INPUT_FRAME_LEN    ((uint8_t)35)
+#define MIN_INPUT_FRAME_LEN    ((uint8_t)5)
+#define MAX_NON_CODED_DATA_LEN ((uint8_t)27)
+#define MAX_CODED_DATA_LEN 	   ((uint8_t)31)
+#define TERMINATION_CHAR	   ((char)'\n')
+#define CODER_FUNCTION 1
+#define DECODER_FUNCTION 0
+
+
+/*void print_str(void *str, uint8_t len)
+{
+	char *ptr = (char*)str;
+	uint8_t i = 0;
+	char val;
+
+	for (i = 0; i < len; i++)
+	{
+		itoa(ptr[i], &val, 10);
+		print(&val);
+	}
+}
+*/
+
+/**
+ *	Receive_Data function receives data from UART host and stores it in input frame buffer.
+ *	Convert_Frame function converts input frame buffer content(ASCII String) to Coded_Data structure format.
+ 	Returns true if the input frame buffer contains valid input values for Hamming Codec.
+ *	DataToFrame function converts processor output data in Coded_Data structure format to output frame buffer content(ASCII String).
+ *  Sent_Data function sends output frame buffer content to UART host.
+ */
+bool Receive_Data(uint8_t *input_str, uint8_t *str_len);
+bool FrameToData(const uint8_t *frame, uint8_t frame_len, Codec_Data *data);
+void DataToFrame(uint8_t *frame, const Codec_Data *data);
+void Send_Data(const uint8_t *output_str, uint8_t str_len);
+
+
+int main()
+{
+	// Processing System variables
+	Codec_Data input_data, output_data;
+	uint8_t input_frame[MAX_INPUT_FRAME_LEN], output_frame[MAX_INPUT_FRAME_LEN];
+	uint8_t frame_len = 0;
+	//char dbg_str[100];
+	//uint8_t i =0;
+
+    // Initialize hardware platform
+	init_platform();
+
+	//print("Processing System started.\n");
+
+	//CODEC_IP_Reg_SelfTest(XPAR_CODEC_IP_0_S00_AXI_BASEADDR);
+	// Infinite test software loop
+    while(1)
+    {
+    	if (Receive_Data(input_frame, &frame_len))
+    	{
+    		//snprintf(dbg_str, 100, "Rcv data");
+    		//print(dbg_str);
+    		//print_str(input_frame, frame_len);
+
+			/*full frame received, process message*/
+    		if (FrameToData(input_frame, &frame_len, &input_data))
+    		{
+
+    			/* Pass data to Hamming Coder/Decoder accelerator IP - handle data */
+    			Handle_Data((const Codec_Data*)&input_data, &output_data);
+    			/* Send processed data to host PC via UART */
+    			DataToFrame(output_frame, (const Codec_Data*)&output_data);
+    			Send_Data(output_frame, output_data.seq_length);
+
+    		}
+    	}
+    }
+
+}
+
+bool Receive_Data(uint8_t *input_str, uint8_t *str_len)
+{
+	static uint8_t frame_len = 0;
+	bool result = false;
+	char input_char;
+
+	/* read single byte from UART */
+	input_char = inbyte();
+	/* echo - debug purpose */
+	// outbyte(input_char);
+	input_str[frame_len] = atoi(&input_char);
+	frame_len++;
+
+	if((TERMINATION_CHAR == input_char) || (MAX_INPUT_FRAME_LEN == frame_len))
+	{
+		*str_len = frame_len;
+		frame_len = 0;
+		result = true;
+	}
+
+	return result;
+}
+
+bool FrameToData(const uint8_t *frame, uint8_t frame_len, Codec_Data *data)
+{
+	bool result = false;
+	uint8_t i;
+
+	if(MIN_INPUT_FRAME_LEN <= frame_len)
+	{
+		if((CODER_FUNCTION == frame[0]) || (DECODER_FUNCTION == frame[0]))
+		{
+			data->function = frame[0];					/* coder/decoder */
+			data->seq_length = 10*frame[1] + frame[2];  /* input sequence length(2 bytes) */
+
+			/* check data length against maximum constraints */
+			if(((CODER_FUNCTION == data->function) && (MAX_NON_CODED_DATA_LEN >= data->seq_length))
+				|| ((DECODER_FUNCTION == data->function) && (MAX_CODED_DATA_LEN >= data->seq_length)))
+			{
+				result = true;
+				for (i = 0; i < data->seq_length; i++)
+				{
+					/* data(MSB) starts at offset of 3 in received UART frame */
+					if(0 == frame[i + 3])
+					{
+						data->data_seq &= ~(1ULL << (data->seq_length - i - 1));
+					}
+					else if (1 == frame[i + 3])
+					{
+						data->data_seq |= 1ULL << (data->seq_length - i - 1);
+					}
+					else
+					{
+						result = false;
+						break;
+					}
+				}
+			}
+		}
+	}
+	return result;
+}
+
+void DataToFrame(uint8_t *frame, const Codec_Data *data)
+{
+	// frame_len is required if frame contains more than single data sequence to encode/decode
+	/* local variables */
+	uint8_t iter;
+	/* conversion loop */
+	for(iter = 0; iter < data->seq_length ; iter++)
+	{
+		if(data->data_seq & (1ULL << (data->seq_length - iter - 1)))
+		{
+			frame[iter] = (char)1 +'0';
+		}
+		else
+		{
+			frame[iter] = (char)0 +'0';
+		}
+	}
+}
+
+void Send_Data(const uint8_t *output_str, uint8_t str_len)
+{
+	uint8_t iter;
+
+	for(iter = 0; iter < str_len; iter++)
+	{
+		outbyte(output_str[iter]);
+	}
+
+	// Send termination character
+	outbyte(TERMINATION_CHAR);
+}
+
+

@@ -1,0 +1,429 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Mon Jun 17 12:21:34 2019
+# Process ID: 2068
+# Current directory: C:/Users/Marcin/Vivado/hc_arm/hc_arm.runs/codec_system_Codec_0_0_synth_1
+# Command line: vivado.exe -log codec_system_Codec_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source codec_system_Codec_0_0.tcl
+# Log file: C:/Users/Marcin/Vivado/hc_arm/hc_arm.runs/codec_system_Codec_0_0_synth_1/codec_system_Codec_0_0.vds
+# Journal file: C:/Users/Marcin/Vivado/hc_arm/hc_arm.runs/codec_system_Codec_0_0_synth_1\vivado.jou
+#-----------------------------------------------------------
+source codec_system_Codec_0_0.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/Marcin/Vivado/ip_repo/Codec_1.0'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2018.3/data/ip'.
+Command: synth_design -top codec_system_Codec_0_0 -part xc7z020clg484-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 1188 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 395.281 ; gain = 99.891
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'codec_system_Codec_0_0' [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ip/codec_system_Codec_0_0/synth/codec_system_Codec_0_0.v:57]
+INFO: [Synth 8-6157] synthesizing module 'Codec_v1_0' [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0.v:4]
+	Parameter C_S1_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S1_AXI_ADDR_WIDTH bound to: 5 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'Codec_v1_0_S1_AXI' [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0_S1_AXI.v:4]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 5 - type: integer 
+	Parameter ADDR_LSB bound to: 2 - type: integer 
+	Parameter OPT_MEM_ADDR_BITS bound to: 2 - type: integer 
+INFO: [Synth 8-226] default block is never used [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0_S1_AXI.v:237]
+INFO: [Synth 8-226] default block is never used [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0_S1_AXI.v:410]
+INFO: [Synth 8-6157] synthesizing module 'hamming_codec' [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0_S1_AXI.v:475]
+	Parameter max_seq_length bound to: 32 - type: integer 
+	Parameter S1 bound to: 5'b00001 
+	Parameter S2 bound to: 5'b00010 
+	Parameter S3 bound to: 5'b00011 
+	Parameter S4 bound to: 5'b00100 
+	Parameter S5 bound to: 5'b00101 
+	Parameter S6 bound to: 5'b00110 
+	Parameter S7 bound to: 5'b00111 
+	Parameter S8 bound to: 5'b01000 
+	Parameter S9 bound to: 5'b01001 
+	Parameter S10 bound to: 5'b01010 
+	Parameter S11 bound to: 5'b01011 
+	Parameter S12 bound to: 5'b01100 
+	Parameter S13 bound to: 5'b01101 
+	Parameter S14 bound to: 5'b01110 
+	Parameter S15 bound to: 5'b01111 
+	Parameter S16 bound to: 5'b10000 
+	Parameter S17 bound to: 5'b10001 
+	Parameter S18 bound to: 5'b10010 
+	Parameter S19 bound to: 5'b10011 
+	Parameter S20 bound to: 5'b10100 
+	Parameter S21 bound to: 5'b10101 
+	Parameter S22 bound to: 5'b10110 
+	Parameter S23 bound to: 5'b10111 
+	Parameter S24 bound to: 5'b11000 
+	Parameter S25 bound to: 5'b11001 
+INFO: [Synth 8-155] case statement is not full and has no default [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0_S1_AXI.v:525]
+INFO: [Synth 8-6155] done synthesizing module 'hamming_codec' (1#1) [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0_S1_AXI.v:475]
+WARNING: [Synth 8-3848] Net slv_reg7 in module/entity Codec_v1_0_S1_AXI does not have driver. [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0_S1_AXI.v:114]
+INFO: [Synth 8-6155] done synthesizing module 'Codec_v1_0_S1_AXI' (2#1) [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0_S1_AXI.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'Codec_v1_0' (3#1) [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'codec_system_Codec_0_0' (4#1) [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ip/codec_system_Codec_0_0/synth/codec_system_Codec_0_0.v:57]
+WARNING: [Synth 8-3331] design Codec_v1_0_S1_AXI has unconnected port S_AXI_AWPROT[2]
+WARNING: [Synth 8-3331] design Codec_v1_0_S1_AXI has unconnected port S_AXI_AWPROT[1]
+WARNING: [Synth 8-3331] design Codec_v1_0_S1_AXI has unconnected port S_AXI_AWPROT[0]
+WARNING: [Synth 8-3331] design Codec_v1_0_S1_AXI has unconnected port S_AXI_ARPROT[2]
+WARNING: [Synth 8-3331] design Codec_v1_0_S1_AXI has unconnected port S_AXI_ARPROT[1]
+WARNING: [Synth 8-3331] design Codec_v1_0_S1_AXI has unconnected port S_AXI_ARPROT[0]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 451.320 ; gain = 155.930
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 451.320 ; gain = 155.930
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 451.320 ; gain = 155.930
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 806.656 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 806.656 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.183 . Memory (MB): peak = 809.594 ; gain = 2.938
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:21 ; elapsed = 00:00:26 . Memory (MB): peak = 809.594 ; gain = 514.203
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:21 ; elapsed = 00:00:26 . Memory (MB): peak = 809.594 ; gain = 514.203
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:26 . Memory (MB): peak = 809.594 ; gain = 514.203
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0_S1_AXI.v:525]
+INFO: [Synth 8-5545] ROM "check_sum" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:27 . Memory (MB): peak = 809.594 ; gain = 514.203
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 9     
+	   3 Input     32 Bit       Adders := 2     
+	   2 Input     17 Bit       Adders := 3     
+	   2 Input      8 Bit       Adders := 1     
+	   2 Input      5 Bit       Adders := 2     
++---Registers : 
+	               32 Bit    Registers := 19    
+	               17 Bit    Registers := 3     
+	                8 Bit    Registers := 1     
+	                5 Bit    Registers := 3     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 8     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 11    
+	  26 Input     32 Bit        Muxes := 5     
+	   7 Input     32 Bit        Muxes := 1     
+	   8 Input     32 Bit        Muxes := 4     
+	  26 Input     17 Bit        Muxes := 4     
+	  26 Input      8 Bit        Muxes := 1     
+	   3 Input      5 Bit        Muxes := 2     
+	   2 Input      5 Bit        Muxes := 3     
+	   2 Input      4 Bit        Muxes := 2     
+	   3 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 2     
+	  26 Input      3 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	  26 Input      2 Bit        Muxes := 2     
+	  26 Input      1 Bit        Muxes := 8     
+	   4 Input      1 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 6     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module hamming_codec 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 9     
+	   3 Input     32 Bit       Adders := 2     
+	   2 Input     17 Bit       Adders := 3     
+	   2 Input      8 Bit       Adders := 1     
+	   2 Input      5 Bit       Adders := 2     
++---Registers : 
+	               32 Bit    Registers := 11    
+	               17 Bit    Registers := 3     
+	                8 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 7     
+	  26 Input     32 Bit        Muxes := 5     
+	   7 Input     32 Bit        Muxes := 1     
+	  26 Input     17 Bit        Muxes := 4     
+	  26 Input      8 Bit        Muxes := 1     
+	   3 Input      5 Bit        Muxes := 2     
+	   2 Input      5 Bit        Muxes := 3     
+	   2 Input      4 Bit        Muxes := 2     
+	   3 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 2     
+	  26 Input      3 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	  26 Input      2 Bit        Muxes := 2     
+	  26 Input      1 Bit        Muxes := 8     
+	   4 Input      1 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 1     
+Module Codec_v1_0_S1_AXI 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 8     
+	                5 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 4     
+	   8 Input     32 Bit        Muxes := 4     
+	   2 Input      1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-4471] merging register 'parity_bit_pos_reg[31:0]' into 'parity_bit_pos_reg[31:0]' [c:/Users/Marcin/Vivado/hc_arm/hc_arm.srcs/sources_1/bd/codec_system/ipshared/d1f7/hdl/Codec_v1_0_S1_AXI.v:610]
+INFO: [Synth 8-5545] ROM "check_sum" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+WARNING: [Synth 8-3331] design codec_system_Codec_0_0 has unconnected port s1_axi_awprot[2]
+WARNING: [Synth 8-3331] design codec_system_Codec_0_0 has unconnected port s1_axi_awprot[1]
+WARNING: [Synth 8-3331] design codec_system_Codec_0_0 has unconnected port s1_axi_awprot[0]
+WARNING: [Synth 8-3331] design codec_system_Codec_0_0 has unconnected port s1_axi_arprot[2]
+WARNING: [Synth 8-3331] design codec_system_Codec_0_0 has unconnected port s1_axi_arprot[1]
+WARNING: [Synth 8-3331] design codec_system_Codec_0_0 has unconnected port s1_axi_arprot[0]
+INFO: [Synth 8-3886] merging instance 'inst/Codec_v1_0_S1_AXI_inst/axi_rresp_reg[0]' (FDRE) to 'inst/Codec_v1_0_S1_AXI_inst/axi_rresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\inst/Codec_v1_0_S1_AXI_inst/axi_rresp_reg[1] )
+INFO: [Synth 8-3886] merging instance 'inst/Codec_v1_0_S1_AXI_inst/axi_bresp_reg[0]' (FDRE) to 'inst/Codec_v1_0_S1_AXI_inst/axi_bresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\inst/Codec_v1_0_S1_AXI_inst/axi_bresp_reg[1] )
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:34 ; elapsed = 00:00:39 . Memory (MB): peak = 809.594 ; gain = 514.203
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+ROM:
++--------------+------------+---------------+----------------+
+|Module Name   | RTL Object | Depth x Width | Implemented As | 
++--------------+------------+---------------+----------------+
+|hamming_codec | i          | 32x1          | LUT            | 
+|hamming_codec | i          | 32x1          | LUT            | 
++--------------+------------+---------------+----------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:48 ; elapsed = 00:00:53 . Memory (MB): peak = 809.863 ; gain = 514.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:48 ; elapsed = 00:00:54 . Memory (MB): peak = 811.152 ; gain = 515.762
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:49 ; elapsed = 00:00:55 . Memory (MB): peak = 847.441 ; gain = 552.051
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:51 ; elapsed = 00:00:57 . Memory (MB): peak = 847.441 ; gain = 552.051
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:51 ; elapsed = 00:00:57 . Memory (MB): peak = 847.441 ; gain = 552.051
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:51 ; elapsed = 00:00:57 . Memory (MB): peak = 847.441 ; gain = 552.051
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:51 ; elapsed = 00:00:57 . Memory (MB): peak = 847.441 ; gain = 552.051
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:51 ; elapsed = 00:00:57 . Memory (MB): peak = 847.441 ; gain = 552.051
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:51 ; elapsed = 00:00:57 . Memory (MB): peak = 847.441 ; gain = 552.051
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |CARRY4 |   115|
+|2     |LUT1   |   150|
+|3     |LUT2   |   130|
+|4     |LUT3   |   152|
+|5     |LUT4   |   198|
+|6     |LUT5   |    87|
+|7     |LUT6   |   450|
+|8     |MUXF7  |    16|
+|9     |FDRE   |   590|
+|10    |FDSE   |     2|
++------+-------+------+
+
+Report Instance Areas: 
++------+-----------------------------+------------------+------+
+|      |Instance                     |Module            |Cells |
++------+-----------------------------+------------------+------+
+|1     |top                          |                  |  1890|
+|2     |  inst                       |Codec_v1_0        |  1890|
+|3     |    Codec_v1_0_S1_AXI_inst   |Codec_v1_0_S1_AXI |  1890|
+|4     |      hamming_codec_rtl_inst |hamming_codec     |  1558|
++------+-----------------------------+------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:51 ; elapsed = 00:00:57 . Memory (MB): peak = 847.441 ; gain = 552.051
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 6 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:35 ; elapsed = 00:00:43 . Memory (MB): peak = 847.441 ; gain = 193.777
+Synthesis Optimization Complete : Time (s): cpu = 00:00:52 ; elapsed = 00:00:57 . Memory (MB): peak = 847.441 ; gain = 552.051
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 131 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'codec_system_Codec_0_0' is not ideal for floorplanning, since the cellview 'hamming_codec' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 847.441 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+33 Infos, 15 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:54 ; elapsed = 00:01:01 . Memory (MB): peak = 847.441 ; gain = 559.215
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 847.441 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Marcin/Vivado/hc_arm/hc_arm.runs/codec_system_Codec_0_0_synth_1/codec_system_Codec_0_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP codec_system_Codec_0_0, cache-ID = 95a318399cb62aad
+INFO: [Coretcl 2-1174] Renamed 3 cell refs.
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 847.441 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Marcin/Vivado/hc_arm/hc_arm.runs/codec_system_Codec_0_0_synth_1/codec_system_Codec_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file codec_system_Codec_0_0_utilization_synth.rpt -pb codec_system_Codec_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Mon Jun 17 12:22:49 2019...

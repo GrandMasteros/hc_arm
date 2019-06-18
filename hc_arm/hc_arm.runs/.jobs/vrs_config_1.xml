@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Runs Version="1" Minor="0">
+	<Run Id="codec_system_auto_pc_0_synth_1" LaunchDir="C:/Users/Marcin/Vivado/hc_arm/hc_arm.runs/codec_system_auto_pc_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="codec_system_rst_ps7_0_100M_0_synth_1" LaunchDir="C:/Users/Marcin/Vivado/hc_arm/hc_arm.runs/codec_system_rst_ps7_0_100M_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="codec_system_Codec_0_0_synth_1" LaunchDir="C:/Users/Marcin/Vivado/hc_arm/hc_arm.runs/codec_system_Codec_0_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="codec_system_processing_system7_0_0_synth_1" LaunchDir="C:/Users/Marcin/Vivado/hc_arm/hc_arm.runs/codec_system_processing_system7_0_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="synth_1" LaunchDir="C:/Users/Marcin/Vivado/hc_arm/hc_arm.runs/synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado">
+		<Parent Id="codec_system_auto_pc_0_synth_1"/>
+		<Parent Id="codec_system_rst_ps7_0_100M_0_synth_1"/>
+		<Parent Id="codec_system_Codec_0_0_synth_1"/>
+		<Parent Id="codec_system_processing_system7_0_0_synth_1"/>
+	</Run>
+	<Parameters>
+		<Parameter Name="runs.monitorLSFJobs" Val="true" Type="bool"/>
+	</Parameters>
+</Runs>
+

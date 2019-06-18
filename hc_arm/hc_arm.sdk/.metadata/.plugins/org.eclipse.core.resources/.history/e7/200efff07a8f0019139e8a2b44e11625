@@ -1,0 +1,76 @@
+/***************************** Include Files *********************************/
+#include <stdint.h>
+#include <stdbool.h>
+#include "xil_io.h"
+#include "xparameters.h"
+
+#include "IP_handler.h"
+#include "Codec.h"
+
+/**************************** user definitions ********************************/
+
+// codec base address redefinition
+#define CODEC_BASE_ADDR 			XPAR_CODEC_S1_AXI_BASEADDR
+// codec registers offset redefinition
+#define START_REG_OFFSET 			CODEC_S1_AXI_SLV_REG0_OFFSET
+#define INPUT_SEQ_REG_OFFSET  		CODEC_S1_AXI_SLV_REG1_OFFSET
+#define INPUT_LENGTH_REG_OFFSET 	CODEC_S1_AXI_SLV_REG2_OFFSET
+#define MODE_REG_OFFSET 			CODEC_S1_AXI_SLV_REG3_OFFSET
+#define OUTPUT_SEQ_REG_OFFSET 		CODEC_S1_AXI_SLV_REG4_OFFSET
+#define OUTPUT_LENGTH_REG_OFFSET	CODEC_S1_AXI_SLV_REG5_OFFSET
+#define READY_REG_OFFSET 			CODEC_S1_AXI_SLV_REG6_OFFSET
+
+// custom processor bits masks
+#define START_CONTROL_REG_MASK ((u32)(0x01))
+#define OUTPUT_READY_REG_MASK  ((u32)(0x01))
+
+
+// #define LOWER_DWORD_MASK(val)  ((u32)((uint64_t)(((uint64_t)val) && ((uint64_t)0x00000000FFFFFFFF))))
+// #define UPPER_DWORD_MASK(val)  ((u32)((uint64_t)(((uint64_t)val) && ((uint64_t)0xFFFFFFFF00000000))>>32))
+
+
+
+/***************************** Accelerator IP service function **********************
+* The function runs the Hamming Coder/Decoder accelerator IP
+* Argument:
+* input - pointer on input data structure for accelerator IP
+* output - pointer on output data structure for accelerator IP
+* Function:
+* It takes input data sequence and parameters and pass it to IP,
+* then waits for response and write received coded/decoded data to output structure.
+*/
+
+void Handle_Data(const Codec_Data *input, Codec_Data *output)
+{
+	/* Debug */
+	// bool result = false;
+	// result = CODEC_IP_mReadReg(CODEC_BASE_ADDR, OUTPUT_READY_REG_OFFSET);
+
+	/* Send data to input data registers of custom processor */
+	CODEC_IP_mWriteReg(CODEC_BASE_ADDR, INPUT_SEQ_LOWER_DWORD_REG_OFFSET, LOWER_DWORD_MASK(input->data_seq));
+	CODEC_IP_mWriteReg(CODEC_BASE_ADDR, INPUT_SEQ_UPPER_DWORD_REG_OFFSET, UPPER_DWORD_MASK(input->data_seq));
+	CODEC_IP_mWriteReg(CODEC_BASE_ADDR, INPUT_SEQ_LENGTH_REG_OFFSET, (u32)input->seq_length);
+	CODEC_IP_mWriteReg(CODEC_BASE_ADDR, INPUT_FUNC_SELECT_REG_OFFSET, (u32)input->function);
+
+	/* Start custom processor - pulse start bit in control register */
+	CODEC_IP_mWriteReg(CODEC_BASE_ADDR, START_CONTROL_REG_OFFSET, (u32)START_CONTROL_REG_MASK);
+
+	/* Wait for ready bit in status register */
+	while((CODEC_IP_mReadReg(CODEC_BASE_ADDR, OUTPUT_READY_REG_OFFSET) & OUTPUT_READY_REG_MASK) == 0);
+	//{
+		//print(CODEC_IP_mReadReg(CODEC_BASE_ADDR, INPUT_SEQ_UPPER_DWORD_REG_OFFSET));
+		//print(CODEC_IP_mReadReg(CODEC_BASE_ADDR, INPUT_SEQ_LOWER_DWORD_REG_OFFSET));
+
+	//}
+	/* Get results */
+	output->function = input->function;
+	// Read output sequence length
+	output->seq_length = (uint8_t)CODEC_IP_mReadReg(CODEC_BASE_ADDR, OUTPUT_SEQ_LENGTH_REG_OFFSET);
+	// Read higher order DWORD
+	output->data_seq = (uint64_t)CODEC_IP_mReadReg(CODEC_BASE_ADDR, OUTPUT_SEQ_UPPER_DWORD_REG_OFFSET) << 32;
+	// Read lower order DWORD
+	output->data_seq |= (uint64_t)CODEC_IP_mReadReg(CODEC_BASE_ADDR, OUTPUT_SEQ_LOWER_DWORD_REG_OFFSET);
+	CODEC_IP_mWriteReg(CODEC_BASE_ADDR, START_CONTROL_REG_OFFSET, 0);
+}
+
+
